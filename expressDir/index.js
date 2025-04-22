@@ -23,3 +23,8 @@ app.get("/search",(req , res) => {
 app.get("*" , (req,res) => {
     res.send("this path does not exist");
 });
+
+app.get("/:username/:id" , (req , res) => {
+    console.log(req.params);
+    res.send("hello , i am here");
+});
