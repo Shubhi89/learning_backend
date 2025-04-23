@@ -20,10 +20,6 @@ app.get("/search",(req , res) => {
     res.send("you contacted search path");
 });
 
-app.get("*" , (req,res) => {
-    res.send("this path does not exist");
-});
-
 app.get("/:username/:id" , (req , res) => {
     console.log(req.params);
     res.send("hello , i am here");
