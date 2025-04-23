@@ -16,11 +16,19 @@ app.get("/" , (req,res)=> {
     res.send("you contacted root path");
 });
 
-app.get("/search",(req , res) => {
-    res.send("you contacted search path");
+app.get("/home",(req , res) => {
+    res.send("you contacted home path");
 });
 
 app.get("/:username/:id" , (req , res) => {
     console.log(req.params);
     res.send("hello , i am here");
+});
+
+app.get("/search" , (req,res)=> {
+    let {q} = req.query;
+    if(!q) {
+        res.send('nothing searched');
+    }
+    res.send(`results for ${q}`);
 });
