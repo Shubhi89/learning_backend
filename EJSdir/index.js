@@ -15,3 +15,6 @@ app.listen(port , ()=> {
     console.log(`listening using port ${port}`);
 });
 
+app.get("/rolldice" , (req , res)=> {
+    res.render("rolldice.ejs");
+});
