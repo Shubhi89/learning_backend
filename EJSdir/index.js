@@ -3,6 +3,9 @@ const app = express();
 const path = require("path");
 const port = 8080;
 
+// serving static files
+app.use(express.static("public"));
+
 // using ejs
 app.set("view engine" , "ejs");
 app.set("views" , path.join(__dirname , "/views"));
