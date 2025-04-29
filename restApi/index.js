@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const port = 8080;
-
+const {v4 : uuidv4} = require("uuid");
 const path = require("path");
 
 app.use(express.urlencoded({extended : true}));
@@ -14,14 +14,17 @@ app.use(express.static(path.join(__dirname , "public")));
 
 let posts = [
     {
+        id : uuidv4(),
         username : "shubhi",
         content : "hello , i am here"
     },
     {
+        id : uuidv4(),
         username : "abc",
         content : "i love coding"
     },
     {
+        id : uuidv4(),
         username : "xyz",
         content : "i love football"
     },
@@ -37,9 +40,20 @@ app.get("/posts/new" , (req , res) => {
 
 app.post("/posts" , (req,res) => {
     let {username , content} = req.body;
-    posts.push({username , content});
-    res.send("working well");
-})
+    let id = uuidv4();
+    posts.push({id , username , content});
+    res.redirect("/posts");
+});
+
+app.get("/posts/:id" , (req,res) => {
+    let {id} = req.params;
+    let post = posts.find((p) => id === p.id);
+    res.render("show.ejs" , {post});
+});
+
+app.patch("/posts/:id" , (req , res)=> {
+    let 
+});
 
 app.listen(port , () => {
     console.log("listening to port ; 8080");
