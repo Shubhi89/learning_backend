@@ -29,17 +29,8 @@ let getRandomUser = () => {
 // for(let i=0;i<100;i++) {
 //   data.push(getRandomUser());
 // }
-// try {
-//   connection.query(q ,[data], (err , result)=> { 
-//     if(err) throw err;
-//     console.log(result);
-//   });
-// } catch (err) {
-//   console.log(err);
-// }
 
-// connection.end();
-
+// home page route
 app.get("/" , (req , res)=> {
   let q = "select count(*) from newuser";
   try {
@@ -52,6 +43,21 @@ app.get("/" , (req , res)=> {
   console.log(err);
   res.send("some error in database");
 }
+});
+
+// show users route
+app.get("/user" , (req , res) => {
+  let q = 'select * from newuser';
+  try {
+    connection.query(q ,(err , result)=> { 
+      if(err) throw err;
+      //res.send(result);
+      res.render("users.ejs" , {result});
+    });
+  } catch (err) {
+    console.log(err);
+    res.send("some error in database");
+  }
 });
 
 app.listen(port , ()=> {
