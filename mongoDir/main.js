@@ -1,7 +1,12 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
+const path = require("path");
+const Chat = require("./models/chat.js");
 
+app.set("views" ,path.join(__dirname , "views"));
+app.set("view engine" , "ejs");
+app.use(express.static(path.join(__dirname,"public")));
 main().then(() => {
     console.log("connection successfull");
 })
@@ -10,6 +15,17 @@ main().then(() => {
 async function main() {
   await mongoose.connect('mongodb://127.0.0.1:27017/whatsapp');
 }
+
+// index route
+app.get("/chats" , async (req,res)=> {
+    let chats = await Chat.find();
+    res.render("index.ejs" , {chats});
+});
+
+// new route
+app.get("/chats/new" , (req , res)=> {
+   res.render("new.ejs"); 
+});
 
 app.get("/" , (req , res) => {
     res.send("working");

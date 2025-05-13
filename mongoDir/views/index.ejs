@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chats</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h3>All chats</h3>
+    <form action="/chats/new" method="get">
+        <button>New chat</button>
+    </form>
+    <br><br><br>
+    <% for(let chat of chats) { %>
+        <div class="chat">
+            <p>From : <%= chat.from%></p>
+            <p>To : <%= chat.to%></p>
+            <div class="msg">
+                <p>Message : <%= chat.msg%></p>
+            </div>
+            <hr>
+        </div>
+        <br><br>
+   <% } %>
+</body>
+</html>
