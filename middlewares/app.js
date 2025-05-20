@@ -15,6 +15,11 @@ app.use("/api", (req,res,next) => {
     res.send("Access Denied");
 });
 
+app.use((err,req,res,next) => {
+    console.log(err);
+    res.status(500).send("Internal Server Error");
+});
+
 app.get("/api", (req, res) => {
     res.send("Access Granted");
 });
