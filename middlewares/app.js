@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const PORT = 8080;
+const ExpressError = require('./expressError');
 
 app.use((req,res,next) => {
     console.log(req);
@@ -12,7 +13,7 @@ app.use("/api", (req,res,next) => {
     if(token === "giveaccess") {
         next();
     }
-    res.send("Access Denied");
+    throw new ExpressError("Access Denied", 401);
 });
 
 app.use((err,req,res,next) => {
