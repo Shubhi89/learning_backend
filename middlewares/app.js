@@ -16,6 +16,15 @@ app.use("/api", (req,res,next) => {
     throw new ExpressError("Access Denied", 401);
 });
 
+// async wrap
+function asyncWrap(fn) {
+    return function (req, res, next) {
+        fn(req, res, next).catch((err) => {
+            next(err);
+        });
+    };
+}
+
 app.use((err,req,res,next) => {
     console.log(err);
     res.status(500).send("Internal Server Error");
